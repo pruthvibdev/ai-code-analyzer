@@ -1,0 +1,621 @@
+[
+  {
+    "id": "cf7572d3-9444-45c9-b407-3108cf7ebf72",
+    "language": "python",
+    "code": "\ndef find_duplicates(numbers):\n    duplicates = []\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if numbers[i] == numbers[j] and numbers[i] not in duplicates:\n                duplicates.append(numbers[i])\n    return duplicates\n",
+    "response": {
+      "id": "cf7572d3-9444-45c9-b407-3108cf7ebf72",
+      "language": "python",
+      "code": "\ndef find_duplicates(numbers):\n    duplicates = []\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if numbers[i] == numbers[j] and numbers[i] not in duplicates:\n                duplicates.append(numbers[i])\n    return duplicates\n",
+      "time_complexity": "O(n²)",
+      "space_complexity": "O(n)",
+      "time_complexity_optimized": "O(n)",
+      "space_complexity_optimized": "O(n)",
+      "quality_score": 80,
+      "summary": "Parsed 7 lines of Python code across 1 functions. Estimated time complexity is O(n²) with O(n) auxiliary space. Cyclomatic complexity is 5 with maximum nesting depth of 4.",
+      "issues": [
+        {
+          "severity": "warning",
+          "title": "Nested Loop Hierarchy Detected (Depth 2)",
+          "description": "Found 2 nested loop layers. In algorithmic code, nested loops over collections of size N typically yield O(n^2) polynomial time complexity.",
+          "line": 5,
+          "column": null,
+          "rule_id": "PERF_NESTED_LOOP"
+        },
+        {
+          "severity": "warning",
+          "title": "Linear Search Operation Inside Loop",
+          "description": "Membership test (`in` or `.count()`) inside an iteration over a collection can degrade execution time from O(n) to O(n²). Consider converting the lookup target to a hash set or dict.",
+          "line": 4,
+          "column": null,
+          "rule_id": "PERF_QUADRATIC_LOOKUP"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Eliminate Quadratic Loops with Hash Lookup",
+          "description": "Replace inner iterations over lists with hash set (`set()`) or dictionary lookups to achieve O(n) average-case time."
+        },
+        {
+          "title": "Type Annotations & Docstrings",
+          "description": "Add PEP 484 type hints (e.g. `def func(items: list[int]) -> list[int]:`) to enhance IDE autocompletion and static verification."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 7,
+        "blank_lines": 1,
+        "comment_lines": 0,
+        "cyclomatic_complexity": 5,
+        "max_nesting_depth": 4,
+        "loop_count": 2,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+      "optimization_explanation": "Replaced O(n²) nested loop linear scan with a single pass using hash sets (`seen` and `duplicates`). Set membership testing is O(1) average time, reducing overall complexity to O(n).",
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T10:44:55.221188"
+    },
+    "created_at": "2026-09-29T10:44:55.221188"
+  },
+  {
+    "id": "68fb67fa-0e3d-4876-b4f8-da07d0b8a572",
+    "language": "python",
+    "code": "\ndef binary_search(arr, target):\n    low = 0\n    high = len(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1\n",
+    "response": {
+      "id": "68fb67fa-0e3d-4876-b4f8-da07d0b8a572",
+      "language": "python",
+      "code": "\ndef binary_search(arr, target):\n    low = 0\n    high = len(arr) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            low = mid + 1\n        else:\n            high = mid - 1\n    return -1\n",
+      "time_complexity": "O(log n)",
+      "space_complexity": "O(1)",
+      "time_complexity_optimized": null,
+      "space_complexity_optimized": null,
+      "quality_score": 95,
+      "summary": "Parsed 12 lines of Python code across 1 functions. Estimated time complexity is O(log n) with O(1) auxiliary space. Cyclomatic complexity is 4 with maximum nesting depth of 4.",
+      "issues": [
+        {
+          "severity": "suggestion",
+          "title": "Missing Documentation / Comments",
+          "description": "No docstrings or explanatory comments were found in this source module. Adding docstrings improves maintainability.",
+          "line": 1,
+          "column": null,
+          "rule_id": "PY_DOC_MISSING"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Type Annotations & Docstrings",
+          "description": "Add PEP 484 type hints (e.g. `def func(items: list[int]) -> list[int]:`) to enhance IDE autocompletion and static verification."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 12,
+        "blank_lines": 1,
+        "comment_lines": 0,
+        "cyclomatic_complexity": 4,
+        "max_nesting_depth": 4,
+        "loop_count": 1,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": null,
+      "optimization_explanation": "Reviewed AST structure and recommended replacing non-linear scans with hash-based structures, adding explicit exception types, and cleaning up scope.",
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T10:44:55.240640"
+    },
+    "created_at": "2026-09-29T10:44:55.240640"
+  },
+  {
+    "id": "c5927361-3e8d-4384-8633-66a67994250d",
+    "language": "python",
+    "code": "def two_sum(nums, target):\n    for i in range(len(nums)):\n        for j in range(i+1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []",
+    "response": {
+      "id": "c5927361-3e8d-4384-8633-66a67994250d",
+      "language": "python",
+      "code": "def two_sum(nums, target):\n    for i in range(len(nums)):\n        for j in range(i+1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]\n    return []",
+      "time_complexity": "O(n²)",
+      "space_complexity": "O(n²)",
+      "time_complexity_optimized": "O(n)",
+      "space_complexity_optimized": "O(n)",
+      "quality_score": 90,
+      "summary": "Parsed 6 lines of Python code across 1 functions. Estimated time complexity is O(n²) with O(n²) auxiliary space. Cyclomatic complexity is 4 with maximum nesting depth of 4.",
+      "issues": [
+        {
+          "severity": "warning",
+          "title": "Nested Loop Hierarchy Detected (Depth 2)",
+          "description": "Found 2 nested loop layers. In algorithmic code, nested loops over collections of size N typically yield O(n^2) polynomial time complexity.",
+          "line": 3,
+          "column": null,
+          "rule_id": "PERF_NESTED_LOOP"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Eliminate Quadratic Loops with Hash Lookup",
+          "description": "Replace inner iterations over lists with hash set (`set()`) or dictionary lookups to achieve O(n) average-case time."
+        },
+        {
+          "title": "Type Annotations & Docstrings",
+          "description": "Add PEP 484 type hints (e.g. `def func(items: list[int]) -> list[int]:`) to enhance IDE autocompletion and static verification."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 6,
+        "blank_lines": 0,
+        "comment_lines": 0,
+        "cyclomatic_complexity": 4,
+        "max_nesting_depth": 4,
+        "loop_count": 2,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": "def two_sum(nums: list[int], target: int) -> list[int]:\n    \"\"\"\n    Find two indices that sum to target in O(n) time using complement hash map.\n    \"\"\"\n    lookup = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in lookup:\n            return [lookup[complement], i]\n        lookup[num] = i\n    return []\n",
+      "optimization_explanation": "Eliminated nested iteration by caching visited complements in an O(1) lookup dictionary. Reduced time complexity from O(n²) to O(n).",
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:24:33.684819"
+    },
+    "created_at": "2026-09-29T16:24:33.684819"
+  },
+  {
+    "id": "363d0ed2-4000-4d79-9af6-4d9c867b46b3",
+    "language": "python",
+    "code": "def find_duplicates(numbers):\n    duplicates = []\n    # Nested loops check every pair: O(n²) time\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if numbers[i] == numbers[j] and numbers[i] not in duplicates:\n                duplicates.append(numbers[i])\n    return duplicates\n\n# Test run\nitems = [1, 2, 3, 2, 4, 5, 1, 6, 3]\nprint(\"Duplicates found:\", find_duplicates(items))\n",
+    "response": {
+      "id": "363d0ed2-4000-4d79-9af6-4d9c867b46b3",
+      "language": "python",
+      "code": "def find_duplicates(numbers):\n    duplicates = []\n    # Nested loops check every pair: O(n²) time\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if numbers[i] == numbers[j] and numbers[i] not in duplicates:\n                duplicates.append(numbers[i])\n    return duplicates\n\n# Test run\nitems = [1, 2, 3, 2, 4, 5, 1, 6, 3]\nprint(\"Duplicates found:\", find_duplicates(items))\n",
+      "time_complexity": "O(n²)",
+      "space_complexity": "O(n)",
+      "time_complexity_optimized": "O(n)",
+      "space_complexity_optimized": "O(n)",
+      "quality_score": 80,
+      "summary": "Parsed 9 lines of Python code across 1 functions. Estimated time complexity is O(n²) with O(n) auxiliary space. Cyclomatic complexity is 5 with maximum nesting depth of 4.",
+      "issues": [
+        {
+          "severity": "warning",
+          "title": "Nested Loop Hierarchy Detected (Depth 2)",
+          "description": "Found 2 nested loop layers. In algorithmic code, nested loops over collections of size N typically yield O(n^2) polynomial time complexity.",
+          "line": 5,
+          "column": null,
+          "rule_id": "PERF_NESTED_LOOP"
+        },
+        {
+          "severity": "warning",
+          "title": "Linear Search Operation Inside Loop",
+          "description": "Membership test (`in` or `.count()`) inside an iteration over a collection can degrade execution time from O(n) to O(n²). Consider converting the lookup target to a hash set or dict.",
+          "line": 4,
+          "column": null,
+          "rule_id": "PERF_QUADRATIC_LOOKUP"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Eliminate Quadratic Loops with Hash Lookup",
+          "description": "Replace inner iterations over lists with hash set (`set()`) or dictionary lookups to achieve O(n) average-case time."
+        },
+        {
+          "title": "Type Annotations & Docstrings",
+          "description": "Add PEP 484 type hints (e.g. `def func(items: list[int]) -> list[int]:`) to enhance IDE autocompletion and static verification."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 9,
+        "blank_lines": 1,
+        "comment_lines": 2,
+        "cyclomatic_complexity": 5,
+        "max_nesting_depth": 4,
+        "loop_count": 2,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+      "optimization_explanation": "Replaced O(n²) nested loop linear scan with a single pass using hash sets (`seen` and `duplicates`). Set membership testing is O(1) average time, reducing overall complexity to O(n).",
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:33:03.840910"
+    },
+    "created_at": "2026-09-29T16:33:03.840910"
+  },
+  {
+    "id": "5ac8b099-9228-48fc-8ac8-1c479f92f882",
+    "language": "python",
+    "code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+    "response": {
+      "id": "5ac8b099-9228-48fc-8ac8-1c479f92f882",
+      "language": "python",
+      "code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+      "time_complexity": "O(n²)",
+      "space_complexity": "O(n)",
+      "time_complexity_optimized": "O(n)",
+      "space_complexity_optimized": "O(n)",
+      "quality_score": 85,
+      "summary": "Parsed 13 lines of Python code across 1 functions. Estimated time complexity is O(n²) with O(n) auxiliary space. Cyclomatic complexity is 3 with maximum nesting depth of 3.",
+      "issues": [
+        {
+          "severity": "warning",
+          "title": "Linear Search Operation Inside Loop",
+          "description": "Membership test (`in` or `.count()`) inside an iteration over a collection can degrade execution time from O(n) to O(n²). Consider converting the lookup target to a hash set or dict.",
+          "line": 8,
+          "column": null,
+          "rule_id": "PERF_QUADRATIC_LOOKUP"
+        },
+        {
+          "severity": "suggestion",
+          "title": "Missing Documentation / Comments",
+          "description": "No docstrings or explanatory comments were found in this source module. Adding docstrings improves maintainability.",
+          "line": 1,
+          "column": null,
+          "rule_id": "PY_DOC_MISSING"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Type Annotations & Docstrings",
+          "description": "Add PEP 484 type hints (e.g. `def func(items: list[int]) -> list[int]:`) to enhance IDE autocompletion and static verification."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 13,
+        "blank_lines": 0,
+        "comment_lines": 0,
+        "cyclomatic_complexity": 3,
+        "max_nesting_depth": 3,
+        "loop_count": 1,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+      "optimization_explanation": "Replaced O(n²) nested loop linear scan with a single pass using hash sets (`seen` and `duplicates`). Set membership testing is O(1) average time, reducing overall complexity to O(n).",
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:41:10.000449"
+    },
+    "created_at": "2026-09-29T16:41:10.000449"
+  },
+  {
+    "id": "bfe47809-1318-4763-aabe-ce63d1a8750e",
+    "language": "python",
+    "code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+    "response": {
+      "id": "bfe47809-1318-4763-aabe-ce63d1a8750e",
+      "language": "python",
+      "code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+      "time_complexity": "O(n²)",
+      "space_complexity": "O(n)",
+      "time_complexity_optimized": "O(n)",
+      "space_complexity_optimized": "O(n)",
+      "quality_score": 85,
+      "summary": "Parsed 13 lines of Python code across 1 functions. Estimated time complexity is O(n²) with O(n) auxiliary space. Cyclomatic complexity is 3 with maximum nesting depth of 3.",
+      "issues": [
+        {
+          "severity": "warning",
+          "title": "Linear Search Operation Inside Loop",
+          "description": "Membership test (`in` or `.count()`) inside an iteration over a collection can degrade execution time from O(n) to O(n²). Consider converting the lookup target to a hash set or dict.",
+          "line": 8,
+          "column": null,
+          "rule_id": "PERF_QUADRATIC_LOOKUP"
+        },
+        {
+          "severity": "suggestion",
+          "title": "Missing Documentation / Comments",
+          "description": "No docstrings or explanatory comments were found in this source module. Adding docstrings improves maintainability.",
+          "line": 1,
+          "column": null,
+          "rule_id": "PY_DOC_MISSING"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Type Annotations & Docstrings",
+          "description": "Add PEP 484 type hints (e.g. `def func(items: list[int]) -> list[int]:`) to enhance IDE autocompletion and static verification."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 13,
+        "blank_lines": 0,
+        "comment_lines": 0,
+        "cyclomatic_complexity": 3,
+        "max_nesting_depth": 3,
+        "loop_count": 1,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": "def find_duplicates(numbers: list) -> list:\n    \"\"\"\n    Optimized duplicate detection using a hash set.\n    Time Complexity: O(n) | Space Complexity: O(n)\n    \"\"\"\n    seen = set()\n    duplicates = set()\n    for num in numbers:\n        if num in seen:\n            duplicates.add(num)\n        else:\n            seen.add(num)\n    return list(duplicates)\n",
+      "optimization_explanation": "Replaced O(n²) nested loop linear scan with a single pass using hash sets (`seen` and `duplicates`). Set membership testing is O(1) average time, reducing overall complexity to O(n).",
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:41:14.298936"
+    },
+    "created_at": "2026-09-29T16:41:14.298936"
+  },
+  {
+    "id": "822cb30c-0399-4a47-abfb-24f64dfb3d7f",
+    "language": "java",
+    "code": "public class TestJava {\n    public static void main(String[] args) {\n        // 1. Test Text Output\n        System.out.println(\"🚀 Success! Your Java environment is working correctly.\");\n        \n        // 2. Test Math Operations\n        int num1 = 15;\n        int num2 = 25;\n        int sum = num1 + num2;\n        System.out.println(\"Basic Math Test: \" + num1 + \" + \" + num2 + \" = \" + sum);\n        \n        // 3. Test Loops and Arrays\n        System.out.print(\"Loop Test (Counting): \");\n        int[] numbers = {1, 2, 3, 4, 5};\n        for (int i = 0; i < numbers.length; i++) {\n            System.out.print(numbers[i] + (i < numbers.length - 1 ? \", \" : \"\"));\n        }\n        System.out.println(\"\\nEverything runs smoothly! 🎉\");\n    }\n}\n",
+    "response": {
+      "id": "822cb30c-0399-4a47-abfb-24f64dfb3d7f",
+      "language": "java",
+      "code": "public class TestJava {\n    public static void main(String[] args) {\n        // 1. Test Text Output\n        System.out.println(\"🚀 Success! Your Java environment is working correctly.\");\n        \n        // 2. Test Math Operations\n        int num1 = 15;\n        int num2 = 25;\n        int sum = num1 + num2;\n        System.out.println(\"Basic Math Test: \" + num1 + \" + \" + num2 + \" = \" + sum);\n        \n        // 3. Test Loops and Arrays\n        System.out.print(\"Loop Test (Counting): \");\n        int[] numbers = {1, 2, 3, 4, 5};\n        for (int i = 0; i < numbers.length; i++) {\n            System.out.print(numbers[i] + (i < numbers.length - 1 ? \", \" : \"\"));\n        }\n        System.out.println(\"\\nEverything runs smoothly! 🎉\");\n    }\n}\n",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "time_complexity_optimized": null,
+      "space_complexity_optimized": null,
+      "quality_score": 78,
+      "summary": "Analyzed 15 lines of JAVA code. Detected 1 loop structures with max nesting depth of 1. Estimated time complexity: O(n), space complexity: O(n). Branching cyclomatic complexity: 2.",
+      "issues": [
+        {
+          "severity": "suggestion",
+          "title": "System.out.println in Production Code",
+          "description": "Use a structured logging framework (e.g., SLF4J, Logback) instead of standard stdout.",
+          "line": 4,
+          "column": null,
+          "rule_id": "JAVA_NO_SOUT"
+        },
+        {
+          "severity": "warning",
+          "title": "String Concatenation in Loop",
+          "description": "Using '+' for string concatenation inside loops allocates new String instances each iteration (O(n²)). Use 'StringBuilder' instead.",
+          "line": 10,
+          "column": null,
+          "rule_id": "JAVA_STRING_BUILDER"
+        },
+        {
+          "severity": "suggestion",
+          "title": "System.out.println in Production Code",
+          "description": "Use a structured logging framework (e.g., SLF4J, Logback) instead of standard stdout.",
+          "line": 10,
+          "column": null,
+          "rule_id": "JAVA_NO_SOUT"
+        },
+        {
+          "severity": "suggestion",
+          "title": "System.out.println in Production Code",
+          "description": "Use a structured logging framework (e.g., SLF4J, Logback) instead of standard stdout.",
+          "line": 18,
+          "column": null,
+          "rule_id": "JAVA_NO_SOUT"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Comprehensive Unit Tests",
+          "description": "Add automated tests covering boundary conditions, empty collections, and large datasets."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 15,
+        "blank_lines": 2,
+        "comment_lines": 3,
+        "cyclomatic_complexity": 2,
+        "max_nesting_depth": 3,
+        "loop_count": 1,
+        "function_count": 1,
+        "class_count": 1,
+        "recursion_detected": false
+      },
+      "optimized_code": null,
+      "optimization_explanation": null,
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:42:49.225873"
+    },
+    "created_at": "2026-09-29T16:42:49.225873"
+  },
+  {
+    "id": "1c954577-4d89-480b-8da6-d094968f1705",
+    "language": "java",
+    "code": "#include <iostream>\n\nint main() {\n    std::cout << \"C++ environment is working perfectly!\" << std::endl;\n    return 0;\n}\n",
+    "response": {
+      "id": "1c954577-4d89-480b-8da6-d094968f1705",
+      "language": "java",
+      "code": "#include <iostream>\n\nint main() {\n    std::cout << \"C++ environment is working perfectly!\" << std::endl;\n    return 0;\n}\n",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(1)",
+      "time_complexity_optimized": null,
+      "space_complexity_optimized": null,
+      "quality_score": 100,
+      "summary": "Analyzed 5 lines of JAVA code. Detected 0 loop structures with max nesting depth of 0. Estimated time complexity: O(1), space complexity: O(1). Branching cyclomatic complexity: 1.",
+      "issues": [],
+      "suggestions": [
+        {
+          "title": "Comprehensive Unit Tests",
+          "description": "Add automated tests covering boundary conditions, empty collections, and large datasets."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 5,
+        "blank_lines": 1,
+        "comment_lines": 0,
+        "cyclomatic_complexity": 1,
+        "max_nesting_depth": 1,
+        "loop_count": 0,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": null,
+      "optimization_explanation": null,
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:44:33.136712"
+    },
+    "created_at": "2026-09-29T16:44:33.136712"
+  },
+  {
+    "id": "972ff4d9-f889-480a-8036-0ba0cd11f853",
+    "language": "python",
+    "code": "def process_user_data(payload, default_list=[]):\n    # Bug 1: Mutable default argument retains state across invocations\n    default_list.append(payload)\n    \n    # Bug 2: Shadowing built-in names\n    id = 1001\n    list = [1, 2, 3]\n    \n    # Bug 3: Critical Security Vulnerability (Arbitrary Remote Code Execution)\n    if \"calc\" in payload:\n        result = eval(payload[\"calc\"])\n    \n    # Bug 4: Bare except suppresses system interruptions and hides bugs\n    try:\n        data = int(payload.get(\"age\", 0))\n    except:\n        data = -1\n        \n    return default_list\n",
+    "response": {
+      "id": "972ff4d9-f889-480a-8036-0ba0cd11f853",
+      "language": "python",
+      "code": "def process_user_data(payload, default_list=[]):\n    # Bug 1: Mutable default argument retains state across invocations\n    default_list.append(payload)\n    \n    # Bug 2: Shadowing built-in names\n    id = 1001\n    list = [1, 2, 3]\n    \n    # Bug 3: Critical Security Vulnerability (Arbitrary Remote Code Execution)\n    if \"calc\" in payload:\n        result = eval(payload[\"calc\"])\n    \n    # Bug 4: Bare except suppresses system interruptions and hides bugs\n    try:\n        data = int(payload.get(\"age\", 0))\n    except:\n        data = -1\n        \n    return default_list\n",
+      "time_complexity": "O(1)",
+      "space_complexity": "O(n)",
+      "time_complexity_optimized": null,
+      "space_complexity_optimized": null,
+      "quality_score": 47,
+      "summary": "Parsed 11 lines of Python code across 1 functions. Estimated time complexity is O(1) with O(n) auxiliary space. Cyclomatic complexity is 3 with maximum nesting depth of 2.",
+      "issues": [
+        {
+          "severity": "warning",
+          "title": "Mutable Default Argument",
+          "description": "Function 'process_user_data' uses a mutable default argument. Default objects are created once at definition and shared across calls. Use None and instantiate inside the function.",
+          "line": 1,
+          "column": null,
+          "rule_id": "PY_MUTABLE_DEFAULT"
+        },
+        {
+          "severity": "suggestion",
+          "title": "Shadowing Built-in Name 'id'",
+          "description": "Variable name 'id' overrides Python's built-in 'id()' function. Rename the variable to avoid unexpected bugs.",
+          "line": 6,
+          "column": null,
+          "rule_id": "PY_SHADOW_BUILTIN"
+        },
+        {
+          "severity": "suggestion",
+          "title": "Shadowing Built-in Name 'list'",
+          "description": "Variable name 'list' overrides Python's built-in 'list()' function. Rename the variable to avoid unexpected bugs.",
+          "line": 7,
+          "column": null,
+          "rule_id": "PY_SHADOW_BUILTIN"
+        },
+        {
+          "severity": "warning",
+          "title": "Bare 'except:' Clause",
+          "description": "Avoid bare 'except:'. It catches SystemExit, KeyboardInterrupt, and masks bugs. Use 'except Exception:' or specify the exact exception type.",
+          "line": 16,
+          "column": null,
+          "rule_id": "PY_BARE_EXCEPT"
+        },
+        {
+          "severity": "critical",
+          "title": "Dangerous 'eval()' Call",
+          "description": "Using 'eval()' allows arbitrary remote code execution and is a severe security vulnerability.",
+          "line": 11,
+          "column": null,
+          "rule_id": "SEC_ARBITRARY_EXEC"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Type Annotations & Docstrings",
+          "description": "Add PEP 484 type hints (e.g. `def func(items: list[int]) -> list[int]:`) to enhance IDE autocompletion and static verification."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 11,
+        "blank_lines": 4,
+        "comment_lines": 4,
+        "cyclomatic_complexity": 3,
+        "max_nesting_depth": 2,
+        "loop_count": 0,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": false
+      },
+      "optimized_code": null,
+      "optimization_explanation": "Reviewed AST structure and recommended replacing non-linear scans with hash-based structures, adding explicit exception types, and cleaning up scope.",
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:50:43.578171"
+    },
+    "created_at": "2026-09-29T16:50:43.578171"
+  },
+  {
+    "id": "a36cb526-8520-47e3-9104-c472d37481f6",
+    "language": "javascript",
+    "code": "// The function you want to test\nfunction calculateTotal(price, taxRate) {\n    if (price < 0 || taxRate < 0) return 0;\n    return price + (price * taxRate);\n}\n\n// Manually passing test cases\nconsole.log(\"Test Case 1 (Standard):\", calculateTotal(100, 0.15) === 115 ? \"✅ PASS\" : \"❌ FAIL\");\nconsole.log(\"Test Case 2 (Zero Tax):\", calculateTotal(50, 0) === 50 ? \"✅ PASS\" : \"❌ FAIL\");\nconsole.log(\"Test Case 3 (Negative Value):\", calculateTotal(-20, 0.1) === 0 ? \"✅ PASS\" : \"❌ FAIL\");\n",
+    "response": {
+      "id": "a36cb526-8520-47e3-9104-c472d37481f6",
+      "language": "javascript",
+      "code": "// The function you want to test\nfunction calculateTotal(price, taxRate) {\n    if (price < 0 || taxRate < 0) return 0;\n    return price + (price * taxRate);\n}\n\n// Manually passing test cases\nconsole.log(\"Test Case 1 (Standard):\", calculateTotal(100, 0.15) === 115 ? \"✅ PASS\" : \"❌ FAIL\");\nconsole.log(\"Test Case 2 (Zero Tax):\", calculateTotal(50, 0) === 50 ? \"✅ PASS\" : \"❌ FAIL\");\nconsole.log(\"Test Case 3 (Negative Value):\", calculateTotal(-20, 0.1) === 0 ? \"✅ PASS\" : \"❌ FAIL\");\n",
+      "time_complexity": "O(n)",
+      "space_complexity": "O(n)",
+      "time_complexity_optimized": null,
+      "space_complexity_optimized": null,
+      "quality_score": 84,
+      "summary": "Analyzed 7 lines of JAVASCRIPT code. Detected 0 loop structures with max nesting depth of 0. Estimated time complexity: O(n), space complexity: O(n). Branching cyclomatic complexity: 6.",
+      "issues": [
+        {
+          "severity": "suggestion",
+          "title": "Console Log Statement",
+          "description": "Remove debugging 'console.log' statements prior to production deployment.",
+          "line": 8,
+          "column": null,
+          "rule_id": "JS_NO_CONSOLE"
+        },
+        {
+          "severity": "suggestion",
+          "title": "Console Log Statement",
+          "description": "Remove debugging 'console.log' statements prior to production deployment.",
+          "line": 9,
+          "column": null,
+          "rule_id": "JS_NO_CONSOLE"
+        },
+        {
+          "severity": "suggestion",
+          "title": "Console Log Statement",
+          "description": "Remove debugging 'console.log' statements prior to production deployment.",
+          "line": 10,
+          "column": null,
+          "rule_id": "JS_NO_CONSOLE"
+        },
+        {
+          "severity": "suggestion",
+          "title": "Recursive Implementation Detected",
+          "description": "Verify termination base conditions to prevent call stack overflow.",
+          "line": 1,
+          "column": null,
+          "rule_id": "ALG_RECURSION"
+        }
+      ],
+      "suggestions": [
+        {
+          "title": "Consider Iterative or Memoized Approach",
+          "description": "Transform deep recursion into an iterative loop or memoization table to eliminate call-stack overflow risks."
+        },
+        {
+          "title": "Comprehensive Unit Tests",
+          "description": "Add automated tests covering boundary conditions, empty collections, and large datasets."
+        }
+      ],
+      "metrics": {
+        "lines_of_code": 7,
+        "blank_lines": 1,
+        "comment_lines": 2,
+        "cyclomatic_complexity": 6,
+        "max_nesting_depth": 1,
+        "loop_count": 0,
+        "function_count": 1,
+        "class_count": 0,
+        "recursion_detected": true
+      },
+      "optimized_code": null,
+      "optimization_explanation": null,
+      "confidence": 0.88,
+      "is_ai_assisted": false,
+      "static_analysis_notice": "AST & rule-based static analyzer active",
+      "created_at": "2026-09-29T16:50:53.633745"
+    },
+    "created_at": "2026-09-29T16:50:53.633745"
+  }
+]
